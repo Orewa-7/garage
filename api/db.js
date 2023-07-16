@@ -1,5 +1,6 @@
 import mysql from "mysql";
 import bcrypt from "bcryptjs";
+import json from "./data.json" assert { type: "json" };
 import dotenv from 'dotenv';
 dotenv.config()
 
@@ -64,10 +65,10 @@ export const initTables = async () => {
       `);
 
     // Create the "Revues" table
-    createTableIfNotExists('Revues', `
+    createTableIfNotExists('Revue', `
         (
           id INT PRIMARY KEY AUTO_INCREMENT,
-          name VARCHAR(255),
+          nom VARCHAR(255),
           commentaire VARCHAR(255),
           note INT,
           approuve BOOLEAN
@@ -89,9 +90,9 @@ const insertIntoTable = (q, value) => {
   })
 }
 
-const checkIfExistInTable = (username, table) => {
+const checkIfExistInTable = (username, table, column) => {
   return new Promise((resolve, reject) => {
-    const q = `SELECT * FROM ${table} WHERE username=?`;
+    const q = `SELECT * FROM ${table} WHERE ${column}=?`;
     db.query(q, [username], (err, data) => {
       if (err) {
         console.log('error', err)
@@ -109,11 +110,11 @@ export const initData = async () => {
   const salt = bcrypt.genSaltSync(10);
 
   // Insert into admin
-  const adminHash = bcrypt.hashSync("admin", salt);
+  const adminHash = bcrypt.hashSync(process.env.ADMIN_PWD, salt);
   const adminQuery = "INSERT INTO admin(`nom`,`username`,`password`) VALUES (?)";
   const adminValues = ["Vincent Parrot", "admin", adminHash];
   try {
-    const adminExist = await checkIfExistInTable("admin", "admin");
+    const adminExist = await checkIfExistInTable("admin", "admin", "username");
     if (!adminExist) {
       insertIntoTable(adminQuery, adminValues);
     }
@@ -126,7 +127,7 @@ export const initData = async () => {
   const employeQuery = "INSERT INTO employe(`nom`,`username`,`password`) VALUES (?)";
   const employeValues = ["Marwan", "employe", employeHash];
   try {
-    const employeExist = await checkIfExistInTable("employe", "employe");
+    const employeExist = await checkIfExistInTable("employe", "employe", "username");
     if (!employeExist) {
       insertIntoTable(employeQuery, employeValues);
     }
@@ -135,7 +136,44 @@ export const initData = async () => {
   }
 
   //Insert into voiture
+  json.data.voitures.map( async (item, key) => {
+    const voitureQuery = "INSERT INTO voiture(`nom`,`photo`,`km`, `annee`,`prix`,`description`) VALUES (?)";
+    const voitureValues = [
+      item.nom,
+      item.photo,
+      item.km,
+      item.annee,
+      item.prix,
+      item.description
+    ]
+    try {
+      const voitureExist = await checkIfExistInTable(item.nom, "voiture", "nom");
+      if (!voitureExist) {
+        insertIntoTable(voitureQuery, voitureValues);
+      }
+    } catch (err) {
+      console.error(err);
+    }
+  });
+
   //Insert into revues
+  json.data.revues.map( async (item, key) => {
+    const commentaireQuery = "INSERT INTO revue(`nom`,`commentaire`,`note`, `approuve`) VALUES (?)";
+    const commentaireValues = [
+      item.nom,
+      item.commentaire,
+      item.note,
+      item.approuve,
+    ]
+    try {
+      const commentaireExist = await checkIfExistInTable(item.nom, "revue", "nom");
+      if (!commentaireExist) {
+        insertIntoTable(commentaireQuery, commentaireValues);
+      }
+    } catch (err) {
+      console.error(err);
+    }
+  });
 
 }
 

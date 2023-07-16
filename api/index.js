@@ -1,7 +1,7 @@
 import express from "express";
 import authRoutes from "./routes/auth.js";
 import userRoutes from "./routes/users.js";
-import postRoutes from "./routes/posts.js";
+import voitureRoutes from "./routes/voitures.js";
 import cookieParser from "cookie-parser";
 import multer from "multer";
 import { initTables, initData } from "./db.js";
@@ -39,7 +39,7 @@ init();
 
 app.use("/api/auth", authRoutes);
 app.use("/api/users", userRoutes);
-app.use("/api/posts", postRoutes);
+app.use("/api/voitures", voitureRoutes);
 
 app.listen(8800, () => {
   console.log("Connected!");

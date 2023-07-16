@@ -1,0 +1,100 @@
+{
+    "data":{
+        "voitures":[
+            {
+                "nom": "mercedes",
+                "photo": "https://images.unsplash.com/photo-1564498617702-7032ead7892c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80",
+                "km": "50000",
+                "annee": "2015",
+                "prix": "120000",
+                "description": "Voiture Mercedes-Benz blanche"
+            },
+            {
+                "nom": "porsche",
+                "photo": "https://images.unsplash.com/photo-1503376780353-7e6692767b70?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
+                "km": "25000",
+                "annee": "2016",
+                "prix": "100000",
+                "description": "Berline Porsche noire"
+            },
+            {
+                "nom": "audi",
+                "photo": "https://images.unsplash.com/photo-1606664515524-ed2f786a0bd6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=688&q=80",
+                "km": "35000",
+                "annee": "2017",
+                "prix": "90000",
+                "description": "Voiture Audi argentée"
+            },
+            {
+                "nom": "bmw",
+                "photo": "https://images.unsplash.com/photo-1639062891941-7d58aaf796fc?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1171&q=80",
+                "km": "40000",
+                "annee": "2018",
+                "prix": "95000",
+                "description": "Voiture BMW bleue"
+            },
+            {
+                "nom": "volkswagen",
+                "photo": "https://images.unsplash.com/photo-1624543367162-5a067d572c02?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=764&q=80",
+                "km": "30000",
+                "annee": "2019",
+                "prix": "80000",
+                "description": "Voiture Volkswagen orange"
+            },
+            {
+                "nom": "ford",
+                "photo": "https://images.unsplash.com/photo-1610915504025-d806f0041582?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1119&q=80",
+                "km": "20000",
+                "annee": "2020",
+                "prix": "75000",
+                "description": "Voiture Ford grise"
+            },
+            {
+                "nom": "toyota",
+                "photo": "https://images.unsplash.com/photo-1613467143018-47d244c8dea7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80",
+                "km": "15000",
+                "annee": "2021",
+                "prix": "70000",
+                "description": "Voiture Toyota rouge"
+            }
+        ],
+        "revues":[
+            {
+                "nom": "Ryan",
+                "commentaire": "Très satisfait de mon achat",
+                "note": 5,
+                "approuve": 1
+            },
+            {
+                "nom": "Mélanie",
+                "commentaire": "Je suis contente de mon achat",
+                "note": 4,
+                "approuve": 0
+            },
+            {
+                "nom": "Luc",
+                "commentaire": "Superbe voiture, mais un peu chère",
+                "note": 4,
+                "approuve": 1
+            },
+            {
+                "nom": "Sophie",
+                "commentaire": "Très bon service client",
+                "note": 5,
+                "approuve": 1
+            },
+            {
+                "nom": "Maxime",
+                "commentaire": "Voiture puissante et élégante, je recommande",
+                "note": 5,
+                "approuve": 1
+            },
+            {
+                "nom": "Claire",
+                "commentaire": "Excellent rapport qualité-prix",
+                "note": 4,
+                "approuve": 1
+            }
+        ]
+    }
+}
