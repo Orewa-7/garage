@@ -3,12 +3,16 @@ import authRoutes from "./routes/auth.js";
 import userRoutes from "./routes/users.js";
 import voitureRoutes from "./routes/voitures.js";
 import cookieParser from "cookie-parser";
+import cors from "cors";
 import multer from "multer";
 import { initTables, initData } from "./db.js";
 
 
 const app = express();
 
+app.use(cors({
+  origin: 'http://localhost:5173'
+}));
 app.use(express.json());
 app.use(cookieParser());
 

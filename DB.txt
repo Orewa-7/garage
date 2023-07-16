@@ -24,6 +24,6 @@ Revues:
 	name CHAR
 	commentaire CHAR
 	note INT
-	approuvé BOOLEAN
+	approuve BOOLEAN
 
 	
