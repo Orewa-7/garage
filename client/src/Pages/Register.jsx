@@ -32,8 +32,8 @@ export default function Register() {
                 <input
                     required
                     type="text"
-                    placeholder="username"
-                    name="username"
+                    placeholder="name"
+                    name="name"
                     onChange={handleChange}
                 />
                 <input
