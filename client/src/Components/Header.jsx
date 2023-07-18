@@ -1,12 +1,31 @@
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../context/AuthContex.jsx";
+import axios from "axios";
+import { proxy } from "../App.jsx";
 
 export default function Header() {
-
     const { currentUser, logout } = useContext(AuthContext);
+    const [isAdmin, setIsAdmin] = useState(null);
 
-
+    const myFunction = async () => {
+        // run asynchronous tasks here
+        if(currentUser){
+            try{
+                const isAdmin = await axios.get(`${proxy}/users/isAdmin`);
+                console.log(isAdmin.data.isAdmin)
+                setIsAdmin(isAdmin.data.isAdmin)
+            } catch(err){
+                console.log(err)
+            }
+        } else {
+            setIsAdmin(null)
+        }
+    };
+    
+    useEffect(() => {
+        myFunction();
+    }, [currentUser]); // Note the curly braces around myFunction!
     return <>
 
         <nav className="header">
@@ -14,11 +33,13 @@ export default function Header() {
                 LOGO
             </div>
             <ul className="header__links">
-                <li className="header__link">
+                {
+                    isAdmin && <li className="header__link">
                     <Link to={"/register"} >
                         Register
                     </Link>
                 </li>
+                }
                 <li className="header__link">
                     <Link to={"/"} >
                         Home

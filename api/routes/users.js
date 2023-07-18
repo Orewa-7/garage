@@ -1,7 +1,8 @@
 import express from "express"
+import { isAdmin } from "../controllers/user.js";
 
 const router = express.Router()
 
-//TODO
+router.get("/isAdmin", isAdmin);
 
 export default router
