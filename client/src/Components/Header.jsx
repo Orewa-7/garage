@@ -13,7 +13,6 @@ export default function Header() {
         if(currentUser){
             try{
                 const isAdmin = await axios.get(`${proxy}/users/isAdmin`);
-                console.log(isAdmin.data.isAdmin)
                 setIsAdmin(isAdmin.data.isAdmin)
             } catch(err){
                 console.log(err)
@@ -50,6 +49,11 @@ export default function Header() {
                 <li className="header__link">
                     <Link to={"/"} >
                         Home
+                    </Link>
+                </li>
+                <li className="header__link">
+                    <Link to={"/Revues"} >
+                        Revues
                     </Link>
                 </li>
                 <li className="header__link">

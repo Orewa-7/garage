@@ -2,6 +2,7 @@ import express from "express";
 import authRoutes from "./routes/auth.js";
 import userRoutes from "./routes/users.js";
 import voitureRoutes from "./routes/voitures.js";
+import revuesRoutes from "./routes/revues.js";
 import cookieParser from "cookie-parser";
 import cors from "cors";
 import multer from "multer";
@@ -45,6 +46,7 @@ init();
 app.use("/api/auth", authRoutes);
 app.use("/api/users", userRoutes);
 app.use("/api/voitures", voitureRoutes);
+app.use("/api/revues", revuesRoutes);
 
 app.listen(8800, () => {
   console.log("Connected!");

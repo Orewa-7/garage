@@ -74,6 +74,7 @@ export const initTables = async () => {
           approuve BOOLEAN
         )
       `);
+      
     resolve(true);
   })
 

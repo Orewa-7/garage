@@ -3,7 +3,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { proxy } from "../App.jsx";
 import { AuthContext } from "../context/AuthContex.jsx";
-import UpdateCar from "./UpdateCar.jsx";
+import UpdateCar from "../Components/Cars/UpdateCar.jsx";
 
 
 
@@ -72,7 +72,7 @@ export default function Single() {
                     }
                     {
                         isUpdating && <div className="updating">
-                            <UpdateCar carDetails={voiture} voitureId={voitureId}/>
+                            <UpdateCar carDetails={voiture} voitureId={voitureId} isAdmin={isAdmin}/>
                         </div>
                     }
                     <div className="content">

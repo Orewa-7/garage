@@ -25,12 +25,17 @@ export const AuthContexProvider = ({ children }) => {
         return isAdmin.data.isAdmin;
     }
 
+    const isEmploye = async ()=>{
+        const isEmploye = await axios.get(`${proxy}/users/isEmploye`);
+        return isEmploye.data.isEmploye;
+    }
+
     useEffect(() => {
         localStorage.setItem("user", JSON.stringify(currentUser));
     }, [currentUser]);
 
     return (
-        <AuthContext.Provider value={{ currentUser, login, logout, isAdmin }}>
+        <AuthContext.Provider value={{ currentUser, login, logout, isAdmin, isEmploye }}>
             {children}
         </AuthContext.Provider>
     );

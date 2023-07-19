@@ -1,10 +1,9 @@
 import { useContext, useEffect, useLayoutEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { proxy } from "../App.jsx";
+import { proxy } from '../../App.jsx'
 import axios from "axios";
-import { AuthContext } from "../context/AuthContex.jsx";
 
-export default function UpdateCar({ carDetails, voitureId }) {
+export default function UpdateCar({ carDetails, voitureId, isAdmin }) {
     const [inputs, setInputs] = useState({
         nom: carDetails.nom,
         photo: carDetails.photo,
@@ -18,8 +17,6 @@ export default function UpdateCar({ carDetails, voitureId }) {
     const [isAdminChecked, setIsAdminCheked] = useState(false);
 
     const navigate = useNavigate();
-
-    const { isAdmin } = useContext(AuthContext);
 
     const CheckIfIsAdmin = async () => {
         const admin = await isAdmin()
