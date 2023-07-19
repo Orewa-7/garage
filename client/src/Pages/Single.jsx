@@ -3,6 +3,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { proxy } from "../App.jsx";
 import { AuthContext } from "../context/AuthContex.jsx";
+import UpdateCar from "./UpdateCar.jsx";
 
 
 
@@ -14,6 +15,7 @@ export default function Single() {
 
     const voitureId = location.pathname.split("/")[2];
     const [isAdminChecked, setIsAdminCheked] = useState(false);
+    const [isUpdating, setIsUpdating] = useState(false);
 
 
     const { currentUser, isAdmin } = useContext(AuthContext);
@@ -48,6 +50,10 @@ export default function Single() {
         }
     }
 
+    const handleUpdate = () => {
+        setIsUpdating(!isUpdating);
+    }
+
     return <>
         <section className="single">
         <div className="single__voiture" key={voiture.id}>
@@ -59,10 +65,15 @@ export default function Single() {
                             <span onClick={handleDelete}>
                                 Delete
                             </span>
-                            <span>
+                            <span onClick={handleUpdate}>
                                 Update 
                             </span>
                         </>
+                    }
+                    {
+                        isUpdating && <div className="updating">
+                            <UpdateCar carDetails={voiture} voitureId={voitureId}/>
+                        </div>
                     }
                     <div className="content">
                         <Link className="link" to={`/voiture/${voiture.id}`}>

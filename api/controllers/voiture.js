@@ -75,15 +75,15 @@ export const updateVoiture = (req, res) => {
   jwt.verify(token, "admin", (err, userInfo) => {
     if (err) return res.status(403).json("Token is not valid!");
 
-    const postId = req.params.id;
+    const voitureId = req.params.id;
     const q =
-      "UPDATE posts SET `title`=?,`desc`=?,`img`=?,`cat`=? WHERE `id` = ? AND `uid` = ?";
+      "UPDATE voiture SET `nom`=?,`photo`=?,`km`=?,`annee`=?,`prix`=?,`description`=?  WHERE `id` = ?";
 
-    const values = [req.body.title, req.body.desc, req.body.img, req.body.cat];
+    const values = [req.body.nom, req.body.photo, req.body.km, req.body.anne, req.body.prix, req.body.description];
 
-    db.query(q, [...values, postId, userInfo.id], (err, data) => {
+    db.query(q, [...values, voitureId, userInfo.id], (err, data) => {
       if (err) return res.status(500).json(err);
-      return res.json("Post has been updated.");
+      return res.json("voiture has been updated.");
     });
   });
 };
