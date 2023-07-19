@@ -1,4 +1,4 @@
-import { Outlet, RouterProvider, createBrowserRouter } from "react-router-dom";
+import { Navigate, Outlet, RouterProvider, createBrowserRouter } from "react-router-dom";
 
 import Footer from "./Components/Footer.jsx";
 import Header from "./Components/Header.jsx";
@@ -6,6 +6,7 @@ import Home from "./Pages/Home.jsx";
 import Register from "./Pages/Register.jsx";
 import Login from "./Pages/Login.jsx";
 import Single from "./Pages/Single.jsx";
+import AddCar from "./Pages/AddCar.jsx";
 
 export const proxy = "http://localhost:8800/api";
 
@@ -32,6 +33,10 @@ const router = createBrowserRouter([
                 path: "/voiture/:id",
                 element: <Single />,
             },
+            {
+                path: "/addCar",
+                element: <AddCar />
+            },
         ],
     },
     {
@@ -42,13 +47,17 @@ const router = createBrowserRouter([
         path: "/login",
         element: <Login />,
     },
+    {
+        path: "*",
+        element: <Navigate to="/" replace />,
+    },
 ]);
 
 export default function App() {
 
     return <>
         <div className="app">
-            <RouterProvider router={router} />
+            <RouterProvider router={router}  />
         </div>
     </>
 }

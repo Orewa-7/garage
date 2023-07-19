@@ -32,20 +32,20 @@ export const addVoiture = (req, res) => {
     if (err) return res.status(403).json("Token is not valid!");
 
     const q =
-      "INSERT INTO posts(`title`, `desc`, `img`, `cat`, `date`,`uid`) VALUES (?)";
+      "INSERT INTO voiture(`nom`, `photo`, `km`, `annee`, `prix`,`description`) VALUES (?)";
 
     const values = [
-      req.body.title,
-      req.body.desc,
-      req.body.img,
-      req.body.cat,
-      req.body.date,
-      userInfo.id,
+      req.body.nom,
+      req.body.photo,
+      req.body.km,
+      req.body.annee,
+      req.body.prix,
+      req.body.description,
     ];
 
     db.query(q, [values], (err, data) => {
       if (err) return res.status(500).json(err);
-      return res.json("Post has been created.");
+      return res.json("Car has been created.");
     });
   });
 };
@@ -57,13 +57,13 @@ export const deleteVoiture = (req, res) => {
   jwt.verify(token, "admin", (err, userInfo) => {
     if (err) return res.status(403).json("Token is not valid!");
 
-    const postId = req.params.id;
-    const q = "DELETE FROM posts WHERE `id` = ? AND `uid` = ?";
+    const voitureId = req.params.id;
+    const q = "DELETE FROM voiture WHERE `id` = ?";
 
-    db.query(q, [postId, userInfo.id], (err, data) => {
-      if (err) return res.status(403).json("You can delete only your post!");
+    db.query(q, [voitureId], (err, data) => {
+      if (err) return res.status(403).json("You can delete only your car!");
 
-      return res.json("Post has been deleted!");
+      return res.json("Car has been deleted!");
     });
   });
 };

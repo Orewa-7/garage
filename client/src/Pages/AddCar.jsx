@@ -4,11 +4,14 @@ import { proxy } from "../App.jsx";
 import axios from "axios";
 import { AuthContext } from "../context/AuthContex.jsx";
 
-export default function Register() {
+export default function addCar() {
     const [inputs, setInputs] = useState({
-        username: "",
-        name: "",
-        password: "",
+        nom: "",
+        photo: "",
+        km: "",
+        annee: "",
+        prix: "",
+        description: "",
     });
 
     const [err, setError] = useState(null);
@@ -36,7 +39,7 @@ export default function Register() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            await axios.post(`${proxy}/auth/register`, inputs);
+            await axios.post(`${proxy}/voitures`, inputs);
             navigate("/");
         } catch (err) {
             setError(err.response.data);
@@ -49,22 +52,43 @@ export default function Register() {
                     <input
                         required
                         type="text"
-                        placeholder="name"
-                        name="name"
+                        placeholder="nom"
+                        name="nom"
                         onChange={handleChange}
                     />
                     <input
                         required
                         type="text"
-                        placeholder="username"
-                        name="username"
+                        placeholder="photo"
+                        name="photo"
                         onChange={handleChange}
                     />
                     <input
                         required
-                        type="password"
-                        placeholder="password"
-                        name="password"
+                        type="text"
+                        placeholder="km"
+                        name="km"
+                        onChange={handleChange}
+                    />
+                    <input
+                        required
+                        type="text"
+                        placeholder="annee"
+                        name="annee"
+                        onChange={handleChange}
+                    />
+                    <input
+                        required
+                        type="text"
+                        placeholder="prix"
+                        name="prix"
+                        onChange={handleChange}
+                    />
+                    <input
+                        required
+                        type="text"
+                        placeholder="description"
+                        name="description"
                         onChange={handleChange}
                     />
                     <button onClick={handleSubmit}>Register</button>

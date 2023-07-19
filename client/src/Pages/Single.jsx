@@ -13,8 +13,10 @@ export default function Single() {
     const navigate = useNavigate();
 
     const voitureId = location.pathname.split("/")[2];
+    const [isAdminChecked, setIsAdminCheked] = useState(false);
 
-    const { currentUser } = useContext(AuthContext);
+
+    const { currentUser, isAdmin } = useContext(AuthContext);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -28,9 +30,18 @@ export default function Single() {
         fetchData();
     }, [voitureId]);
 
+    const CheckIfIsAdmin = async () => {
+        const admin = await isAdmin()
+        setIsAdminCheked(admin);
+    }
+
+    useEffect(() => {
+        CheckIfIsAdmin()
+    }, [currentUser])
+
     const handleDelete = async () => {
         try {
-            await axios.delete(`${proxy}/posts/${voitureId}`);
+            await axios.delete(`${proxy}/voitures/${voitureId}`);
             navigate("/")
         } catch (err) {
             console.log(err);
@@ -43,6 +54,16 @@ export default function Single() {
                     <div className="img">
                         <img src={voiture.photo} alt="" />
                     </div>
+                    {
+                        isAdminChecked && <>
+                            <span onClick={handleDelete}>
+                                Delete
+                            </span>
+                            <span>
+                                Update 
+                            </span>
+                        </>
+                    }
                     <div className="content">
                         <Link className="link" to={`/voiture/${voiture.id}`}>
                             <h1>{voiture.nom}</h1>

@@ -40,6 +40,13 @@ export default function Header() {
                     </Link>
                 </li>
                 }
+                {
+                    isAdmin && <li className="header__link">
+                    <Link to={"/addCar"} >
+                        Ajouter une voiture
+                    </Link>
+                </li>
+                }
                 <li className="header__link">
                     <Link to={"/"} >
                         Home
