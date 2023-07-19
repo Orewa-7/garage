@@ -52,7 +52,7 @@ export default function Header() {
                     </Link>
                 </li>
                 <li className="header__link">
-                    <Link to={"/Revues"} >
+                    <Link to={"/revues"} >
                         Revues
                     </Link>
                 </li>
