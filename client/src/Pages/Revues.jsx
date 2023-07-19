@@ -6,7 +6,8 @@ import AddRevue from "../Components/Revues/AddRevue.jsx";
 
 export default function Revue() {
     const [revues, setRevues] = useState([]);
-    const [isEmployeChecked, setIsEmployeCheked] = useState(false)
+    const [isEmployed, setIsEmployed] = useState(false)
+    const [isEmployeChecked, setIsEmployeChecked] = useState(false)
     const [notification, setNotification] = useState(null)
 
     const { currentUser, isEmploye } = useContext(AuthContext);
@@ -14,9 +15,10 @@ export default function Revue() {
 
     useEffect(() => {
         const fetchData = async () => {
-            const isEmployed = await isEmploye();
-            setIsEmployeCheked(true);
-            if (isEmployed) {
+            const employe = await isEmploye();
+            setIsEmployed(employe);
+            setIsEmployeChecked(true);
+            if (employe) {
                 try {
                     const res = await axios.get(`${proxy}/revues/all`);
                     setRevues(res.data);
@@ -57,14 +59,15 @@ export default function Revue() {
     return <>
         <section className="revues">
             <AddRevue />
-            {isEmployeChecked && revues.length && revues.map((item) => {
+            {notification && <span>{notification}</span>}
+            {isEmployeChecked && revues.map((item) => {
                 return <>
                     <div key={item.id}>
                         <h1>
                             {item.nom}
                         </h1>
                         {
-                            isEmploye && <div>
+                            isEmployed && <div>
                                 <span onClick={() => handleDelete(item.id)}>
                                     delete
                                 </span>
@@ -75,7 +78,6 @@ export default function Revue() {
                                 }
                             </div>
                         }
-                        {notification && <span>{notification}</span>}
                         <p>
                             {item.commentaire}
                         </p>
