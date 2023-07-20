@@ -3,6 +3,7 @@ import authRoutes from "./routes/auth.js";
 import userRoutes from "./routes/users.js";
 import voitureRoutes from "./routes/voitures.js";
 import revuesRoutes from "./routes/revues.js";
+import revuesHeures from "./routes/heures.js";
 import cookieParser from "cookie-parser";
 import cors from "cors";
 import multer from "multer";
@@ -47,6 +48,7 @@ app.use("/api/auth", authRoutes);
 app.use("/api/users", userRoutes);
 app.use("/api/voitures", voitureRoutes);
 app.use("/api/revues", revuesRoutes);
+app.use("/api/horaires", revuesHeures);
 
 app.listen(8800, () => {
   console.log("Connected!");

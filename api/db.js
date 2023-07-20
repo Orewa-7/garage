@@ -27,7 +27,7 @@ const createTableIfNotExists = (tableName, sql) => {
 };
 
 export const initTables = async () => {
-  db.connect(function(err) {
+  db.connect(function (err) {
     if (err) throw err;
     console.log("Connected!");
     db.query("CREATE DATABASE IF NOT EXISTS  garage", function (err, result) {
@@ -83,7 +83,17 @@ export const initTables = async () => {
           approuve BOOLEAN
         )
       `);
-      
+
+    // Create the "Horaires" table
+    createTableIfNotExists('Horaires', `
+        (
+          id INT AUTO_INCREMENT PRIMARY KEY,
+          jour_semaine VARCHAR(20) NOT NULL,
+          heure_ouverture TIME,
+          heure_fermeture TIME
+        )
+      `);
+
     resolve(true);
   })
 
@@ -145,8 +155,28 @@ export const initData = async () => {
     console.error(err);
   }
 
+  //Insert into Horaires
+  const horairesQuery = "INSERT INTO horaires (jour_semaine, heure_ouverture, heure_fermeture) VALUES (?)";
+  const horairesValues = [['Lundi', '08:00:00', '18:00:00'],
+  ['Mardi', '08:00:00', '18:00:00'],
+  ['Mercredi', '08:00:00', '18:00:00'],
+  ['Jeudi', '08:00:00', '18:00:00'],
+  ['Vendredi', '08:00:00', '18:00:00'],
+  ['Samedi', '09:00:00', '13:00:00'],
+  ['Dimanche', null, null]];
+  horairesValues.map(async (item, key)=>{
+    try {
+      const horairesExist = await checkIfExistInTable(item[0], "horaires", "jour_semaine");
+      if (!horairesExist) {
+        insertIntoTable(horairesQuery, item);
+      }
+    } catch (err) {
+      console.error(err);
+    }
+  })
+
   //Insert into voiture
-  json.data.voitures.map( async (item, key) => {
+  json.data.voitures.map(async (item, key) => {
     const voitureQuery = "INSERT INTO voiture(`nom`,`photo`,`km`, `annee`,`prix`,`description`) VALUES (?)";
     const voitureValues = [
       item.nom,
@@ -167,7 +197,7 @@ export const initData = async () => {
   });
 
   //Insert into revues
-  json.data.revues.map( async (item, key) => {
+  json.data.revues.map(async (item, key) => {
     const commentaireQuery = "INSERT INTO revue(`nom`,`commentaire`,`note`, `approuve`) VALUES (?)";
     const commentaireValues = [
       item.nom,

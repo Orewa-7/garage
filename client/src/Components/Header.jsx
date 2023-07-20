@@ -57,6 +57,11 @@ export default function Header() {
                     </Link>
                 </li>
                 <li className="header__link">
+                    <Link to={"/horaires"} >
+                        Horaires d'ouverture
+                    </Link>
+                </li>
+                <li className="header__link">
                     {
                         currentUser ?
                             <span onClick={logout}>Logout</span>

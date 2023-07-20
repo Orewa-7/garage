@@ -8,6 +8,7 @@ import Login from "./Pages/Login.jsx";
 import Single from "./Pages/Single.jsx";
 import AddCar from "./Pages/AddCar.jsx";
 import Revue from "./Pages/Revues.jsx";
+import Horaires from "./Pages/Horaires.jsx";
 
 export const proxy = "http://localhost:8800/api";
 
@@ -41,6 +42,10 @@ const router = createBrowserRouter([
             {
                 path: "/addCar",
                 element: <AddCar />
+            },
+            {
+                path: "/horaires",
+                element: <Horaires />
             },
         ],
     },
