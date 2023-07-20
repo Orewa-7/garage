@@ -1,4 +1,4 @@
-import mysql from "mysql";
+import mysql from "mysql2";
 import bcrypt from "bcryptjs";
 import json from "./data.json" assert { type: "json" };
 import dotenv from 'dotenv';
@@ -27,6 +27,15 @@ const createTableIfNotExists = (tableName, sql) => {
 };
 
 export const initTables = async () => {
+  db.connect(function(err) {
+    if (err) throw err;
+    console.log("Connected!");
+    db.query("CREATE DATABASE IF NOT EXISTS  garage", function (err, result) {
+      if (err) throw err;
+      console.log("Database created");
+    });
+  })
+
   return new Promise(async (resolve, reject) => {
 
     console.log('Creating tables in database...');
